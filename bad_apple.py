@@ -6,11 +6,10 @@ import numpy as np
 import cv2
 
 
-TERM_WIDTH = 203
-TERM_HEIGHT = 55
-
-
 def main():
+    TERM_WIDTH = int(os.popen('tput cols').read())
+    TERM_HEIGHT = int(os.popen('tput lines').read())
+
     cap = cv2.VideoCapture('bad_apple.mp4')
     assert cap.isOpened(), "Can't open the video"
 
@@ -27,7 +26,7 @@ def main():
             break
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        ascii_frame= ''
+        ascii_frame = ''
 
         for h in range(TERM_HEIGHT):
             for w in range(TERM_WIDTH):
